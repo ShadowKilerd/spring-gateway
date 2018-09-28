@@ -9,24 +9,27 @@ zuul:
   routes:
     products:
       path: /products/**
-      serviceId: productService
-      stripPrefix: false
+      serviceId: product
+      stripPrefix: true
       retryable: true
+#
+#mall:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.example.gateway.PriorityServiceList
+#
+#    MaxTotalHttpConnections: 500
+#    MaxConnectionsPerHost: 100
+##    retryable
+#
+#    retryableStatusCodes: 404, 502, 500
+#    MaxAutoRetries: 1
+#    MaxAutoRetriesNextServer: 10
+#    OkToRetryOnAllOperations: true
+#    ConnectTimeout: 1000
+#    ReadTimeout: 3000
 
-productService:
-  ribbon:
-    NFLoadBalancerRuleClassName: com.example.gateway.PriorityServiceList
 
-    listOfServers: http://localhost:8081
-
-
-    MaxTotalHttpConnections: 500
-    MaxConnectionsPerHost: 100
-#    retryable
-
-    retryableStatusCodes: 404, 502, 500
-    MaxAutoRetries: 1
-    MaxAutoRetriesNextServer: 10
-    OkToRetryOnAllOperations: true
-    ConnectTimeout: 1000
-    ReadTimeout: 3000
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9876/eureka
